@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-devtools",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Vite plugin to add devtools",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
