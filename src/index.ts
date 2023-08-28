@@ -1,29 +1,34 @@
-import { IndexHtmlTransformResult, Plugin } from "vite";
+import { IndexHtmlTransformResult, Plugin, ConfigEnv } from "vite";
 
 export interface VitePluginDevtoolsOptions {
   /**
    * https://github.com/Tencent/vConsole
    */
-  vconsole?: boolean;
+  vconsole?: boolean | ((env: ConfigEnv) => boolean);
   /**
    * https://github.com/liriliri/eruda
    */
-  eruda?: boolean;
+  eruda?: boolean | ((env: ConfigEnv) => boolean);
 }
 
 export default function vitePluginDevtools({
-  vconsole,
-  eruda,
+  vconsole = false,
+  eruda = false,
 }: VitePluginDevtoolsOptions): Plugin {
-  let build = true;
+  let env: ConfigEnv;
 
   return {
     name: "vite-plugin-devtools",
-    configResolved({ command }) {
-      build = command === "build";
+    config(_, e) {
+      env = e;
     },
     transformIndexHtml() {
-      if (build) return;
+      if (typeof vconsole === "function") {
+        vconsole = vconsole(env);
+      }
+      if (typeof eruda === "function") {
+        eruda = eruda(env);
+      }
 
       return [
         ...(vconsole

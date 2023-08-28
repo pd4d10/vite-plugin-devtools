@@ -14,7 +14,9 @@ export default {
   // ...
   plugins: [
     devtools({
-      vconsole: false, // set to true to enable
+      // set to `true` to enable, or a function which takes env:
+      // e.g. (env) => env !== 'production'
+      vconsole: false,
       eruda: false,
     }),
   ],
