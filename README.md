@@ -14,12 +14,7 @@ export default {
   // ...
   plugins: [
     devtools({
-      // set to `true` to enable, or a function which takes Vite config env:
-      //
-      // e.g. (env) => env.mode !== 'production'
-      //
-      // https://vitejs.dev/guide/env-and-mode.html
-      vconsole: false,
+      vconsole: false, // set to true to enable
       eruda: false,
     }),
   ],
